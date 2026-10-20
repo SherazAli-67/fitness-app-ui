@@ -1,4 +1,5 @@
 import 'package:fitness_app/constants/string_const.dart';
+import 'package:fitness_app/routing/router.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,13 +12,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: StringConst.appTitle,
       theme: ThemeData(
         brightness: .light,
         fontFamily: StringConst.appFontFamily
       ),
-      home: Scaffold(body: Center(child: Text("Fitness App"),),)
+      routerConfig: router,
+      builder: (ctx, child)=> child!,
     );
   }
 }
