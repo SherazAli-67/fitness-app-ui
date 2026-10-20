@@ -1,3 +1,4 @@
+import 'package:fitness_app/constants/string_const.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,9 +12,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Fitness App',
+      title: StringConst.appTitle,
       theme: ThemeData(
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+        brightness: .light,
+        fontFamily: StringConst.appFontFamily
       ),
       home: Scaffold(body: Center(child: Text("Fitness App"),),)
     );
