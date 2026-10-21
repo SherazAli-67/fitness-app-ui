@@ -16,6 +16,12 @@ class AppColors {
   static const heartRateCardColor = Color(0xFFFEE7FB);
   static const caloriesIconBgColor = Color(0xFFC8F1FF);
 
+  static const calendarSelectedColor = Color(0xFF62FF68);
+  static const calendarDayBgColor = Color(0x1A9F9F9F);
+  static const activityRunningAccent = Color(0xFFA9E1EB);
+  static const activityWeightAccent = Color(0xFFCAEBA7);
+  static const activityMuscleAccent = Color(0xFFCCC9F2);
+
   static const calorieBarColor = Color(0xFF75D2F1);
   static const progressTrackColor = Color(0xFF5CB9EE);
   static const progressFillColor = Color(0xFFA7DFFF);

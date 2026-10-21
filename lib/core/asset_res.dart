@@ -19,8 +19,10 @@ class AssetRes {
 
   static const icAdd = '${_iconsPath}ic_add.svg';
   static const icAddCircle = '${_iconsPath}ic_add_circle.svg';
+  static const icBack = '${_iconsPath}ic_back.svg';
   static const icBannerClose = '${_iconsPath}ic_banner_close.svg';
   static const icCalendarUnselected = '${_iconsPath}ic_calendar_unselected.svg';
+  static const icChevronDown = '${_iconsPath}ic_chevron_down.svg';
   static const icCaloriesUnselected = '${_iconsPath}ic_calories_unselected.svg';
   static const icClose = '${_iconsPath}ic_close.svg';
   static const icHomeUnselected = '${_iconsPath}ic_home_unselected.svg';

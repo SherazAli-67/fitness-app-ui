@@ -110,31 +110,39 @@ class AppTextStyles {
   static const calendarYear = TextStyle(
     fontFamily: StringConst.appFontFamily,
     fontWeight: .w700,
-    fontSize: 28,
-    height: 1.2,
+    fontSize: 34.68,
+    height: 1,
     color: AppColors.blackColor,
   );
 
   static const calendarMonth = TextStyle(
     fontFamily: StringConst.appFontFamily,
-    fontWeight: .w500,
-    fontSize: 16,
+    fontWeight: .w600,
+    fontSize: 20.683,
     height: 1,
     color: AppColors.blackColor,
   );
 
   static const calendarWeekday = TextStyle(
     fontFamily: StringConst.appFontFamily,
-    fontWeight: .w500,
-    fontSize: 14,
+    fontWeight: .w400,
+    fontSize: 20,
+    height: 1,
+    color: AppColors.blackColor,
+  );
+
+  static const calendarWeekdayActive = TextStyle(
+    fontFamily: StringConst.appFontFamily,
+    fontWeight: .w600,
+    fontSize: 20,
     height: 1,
     color: AppColors.blackColor,
   );
 
   static const calendarDay = TextStyle(
     fontFamily: StringConst.appFontFamily,
-    fontWeight: .w500,
-    fontSize: 14,
+    fontWeight: .w600,
+    fontSize: 16.035,
     height: 1,
     color: AppColors.blackColor,
   );
@@ -142,33 +150,42 @@ class AppTextStyles {
   static const activityTime = TextStyle(
     fontFamily: StringConst.appFontFamily,
     fontWeight: .w500,
-    fontSize: 12,
-    height: 1,
+    fontSize: 14,
+    height: 1.1,
     color: AppColors.blackColor,
   );
 
   static const activityTitle = TextStyle(
     fontFamily: StringConst.appFontFamily,
-    fontWeight: .w500,
-    fontSize: 15,
+    fontWeight: .w600,
+    fontSize: 16,
     height: 1,
     color: AppColors.blackColor,
   );
 
   static const activityValue = TextStyle(
     fontFamily: StringConst.appFontFamily,
-    fontWeight: .w700,
-    fontSize: 18,
-    height: 1,
+    fontWeight: .w500,
+    fontSize: 15,
+    height: 1.5,
     color: AppColors.blackColor,
   );
 
   static const activityGoal = TextStyle(
     fontFamily: StringConst.appFontFamily,
-    fontWeight: .w500,
+    fontWeight: .w400,
     fontSize: 12,
     height: 1,
     color: AppColors.blackColor,
+  );
+
+  static const seeAllUnderline = TextStyle(
+    fontFamily: StringConst.appFontFamily,
+    fontWeight: .w400,
+    fontSize: 16,
+    height: 1,
+    color: AppColors.blackColor,
+    decoration: TextDecoration.underline,
   );
 
   static const workoutAlert = TextStyle(

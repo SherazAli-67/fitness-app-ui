@@ -51,10 +51,26 @@ class NumberConstant {
   static const bottomNavIconPadding = 20.0;
   static const bottomNavBottomInset = 8.0;
 
-  static const calendarCardRadius = 27.0;
+  static const calendarCardRadius = 25.0;
+  static const calendarCardHPadding = 14.0;
+  static const calendarCardVPadding = 20.0;
+  static const calendarHeaderGap = 21.0;
+  static const calendarGridGap = 8.0;
   static const calendarDaySize = 44.32;
-  static const activityCardRadius = 20.0;
-  static const activityGoalRadius = 27.0;
+  static const calendarDayGap = 7.13;
+  static const activityCardRadius = 10.0;
+  static const activityCardHeight = 75.0;
+  static const activityAccentWidth = 9.0;
+  static const activityGoalRadius = 25.0;
+  static const activityGoalHeight = 27.0;
+  static const activityGoalWidth = 83.0;
+  static const activityTimeWidth = 39.0;
+  static const activityListGap = 11.0;
+  static const activitySectionGap = 22.0;
+  static const activityCardHPadding = 17.0;
+  static const activityAvatarSize = 31.0;
+  static const activityAvatarOverlap = 18.0;
+  static const activityBottomContentPadding = 120.0;
 
   static const workoutAlertRadius = 12.0;
   static const workoutMetricIconSize = 40.0;
