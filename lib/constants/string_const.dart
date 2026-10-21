@@ -52,4 +52,8 @@ class StringConst {
   static const cancel = 'Cancel';
   static const next = 'Next';
   static const workoutTimer = '32:15:47';
+
+  static const caloriesScreen = 'Calories';
+  static const profileScreen = 'Profile';
+  static const activeWorkoutScreen = 'Active Workout';
 }

@@ -31,6 +31,9 @@ class NumberConstant {
   static const bottomNavHeight = 88.544;
   static const bottomNavItemSize = 74.544;
   static const bottomNavRadius = 37.0;
+  static const bottomNavBarPadding = 6.0;
+  static const bottomNavIconPadding = 26.0;
+  static const bottomNavBottomInset = 8.0;
 
   static const calendarCardRadius = 27.0;
   static const calendarDaySize = 44.32;
