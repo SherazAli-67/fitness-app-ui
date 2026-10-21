@@ -55,7 +55,7 @@ class AppData {
     MetricCardModel(
       title: StringConst.heartRate,
       value: '135',
-      unit: StringConst.bpm,
+      unit: StringConst.steps,
       iconSymbol: StringConst.heartRateSymbol,
       accentColor: AppColors.heartRateCardColor,
       chartKind: .wave,

@@ -24,6 +24,8 @@ class AppColors {
   static const mutedTextColor = Color(0x40000000);
   static const borderColor = Color(0x33AAAAAA);
   static const lightBorderColor = Color(0xFFF0F0F0);
+  static const avatarBorderColor = Color(0xFFBFE0F2);
+  static const pageDotInactiveColor = Color(0xFFD9D9D9);
   static const glassBorderColor = Color(0xFFFFFFFF);
   static const glassBgColor = Color(0x1AFFFFFF);
   static const workoutGradientColor = Color(0xFF919194);

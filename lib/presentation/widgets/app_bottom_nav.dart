@@ -20,39 +20,36 @@ class AppBottomNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Padding(
-        padding: .only(bottom: NumberConstant.bottomNavBottomInset),
-        child: Center(
-          child: Container(
-            decoration: BoxDecoration(
-              color: AppColors.pureBlackColor,
-              borderRadius: .circular(NumberConstant.bottomNavRadius),
-            ),
-            padding: .all(NumberConstant.bottomNavBarPadding),
-            child: Row(
-              mainAxisSize: .min,
-              children: List.generate(_icons.length, (index) {
-                final isSelected = currentIndex == index;
-                return GestureDetector(
-                  onTap: () => onTap(index),
-                  behavior: .opaque,
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      color: isSelected ? AppColors.whiteColor : null,
-                      shape: .circle,
-                    ),
-                    child: Padding(
-                      padding: .all(NumberConstant.bottomNavIconPadding),
-                      child: SvgPicture.asset(
-                        _icons[index],
-                        colorFilter: .mode(isSelected ? AppColors.blackColor : AppColors.whiteColor, .srcIn),
-                      ),
-                    ),
+      child: Container(
+        margin: .only(bottom: NumberConstant.bottomNavBottomInset, left: 45, right: 45),
+        decoration: BoxDecoration(
+          color: AppColors.pureBlackColor,
+          borderRadius: .circular(NumberConstant.bottomNavRadius),
+        ),
+        padding: .all(NumberConstant.bottomNavBarPadding),
+        child: Row(
+          mainAxisSize: .min,
+          mainAxisAlignment: .spaceAround,
+          children: List.generate(_icons.length, (index) {
+            final isSelected = currentIndex == index;
+            return GestureDetector(
+              onTap: () => onTap(index),
+              behavior: .opaque,
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  color: isSelected ? AppColors.whiteColor : null,
+                  shape: .circle,
+                ),
+                child: Padding(
+                  padding: .all(NumberConstant.bottomNavIconPadding),
+                  child: SvgPicture.asset(
+                    _icons[index],
+                    colorFilter: .mode(isSelected ? AppColors.blackColor : AppColors.whiteColor, .srcIn),
                   ),
-                );
-              }),
-            ),
-          ),
+                ),
+              ),
+            );
+          }),
         ),
       ),
     );

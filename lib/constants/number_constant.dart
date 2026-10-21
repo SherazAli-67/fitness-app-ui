@@ -3,7 +3,7 @@ class NumberConstant {
   static const screenTopPadding = 55.0;
 
   static const headerAvatarSize = 52.0;
-  static const circleIconPadding = 12.133;
+  static const circleIconPadding = 11.556;
   static const searchIconSize = 27.733;
 
   static const bannerHeight = 195.0;
@@ -25,14 +25,30 @@ class NumberConstant {
   static const metricCardPadding = 5.0;
   static const metricInnerHeight = 143.0;
   static const metricIconSize = 26.0;
+  static const metricGridGap = 16.0;
+  static const metricRowGap = 14.0;
   static const addActivityCardHeight = 201.26;
+  static const addActivityCardRadius = 27.2;
+  static const homeSectionSpacing = 14.0;
+  static const homeHeaderToBanner = 29.0;
+  static const homeBannerToDots = 21.0;
+  static const homeDotsToCategories = 14.0;
+  static const homeCategoriesToMetrics = 14.0;
+  static const homeBottomContentPadding = 120.0;
+  static const bannerContentLeft = 18.0;
+  static const bannerImageWidth = 177.0;
+  static const stackedAvatarOverlap = 18.0;
+  static const calorieBarWidth = 8.0;
+  static const calorieBarGap = 7.0;
+  static const pageDotSize = 7.0;
+  static const pageDotGap = 7.0;
 
   static const bottomNavWidth = 334.176;
   static const bottomNavHeight = 88.544;
   static const bottomNavItemSize = 74.544;
-  static const bottomNavRadius = 37.0;
+  static const bottomNavRadius = 99.0;
   static const bottomNavBarPadding = 6.0;
-  static const bottomNavIconPadding = 26.0;
+  static const bottomNavIconPadding = 20.0;
   static const bottomNavBottomInset = 8.0;
 
   static const calendarCardRadius = 27.0;

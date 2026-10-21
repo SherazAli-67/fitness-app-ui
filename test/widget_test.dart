@@ -6,6 +6,6 @@ void main() {
   testWidgets('App launches on home shell', (tester) async {
     await tester.pumpWidget(const MyApp());
     await tester.pumpAndSettle();
-    expect(find.text(StringConst.appTitle), findsOneWidget);
+    expect(find.textContaining(StringConst.greetingName), findsOneWidget);
   });
 }
