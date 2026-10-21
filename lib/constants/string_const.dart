@@ -27,6 +27,7 @@ class StringConst {
   static const heartRate = 'Heart rate';
   static const time = 'Time';
   static const kcal = 'Kcal';
+  static const bpm = 'BPM';
   static const addActivity = 'Add activity';
 
   static const myActivity = 'My activity';
