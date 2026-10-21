@@ -73,10 +73,24 @@ class NumberConstant {
   static const activityBottomContentPadding = 120.0;
 
   static const workoutAlertRadius = 12.0;
+  static const workoutAlertBlur = 26.609;
+  static const workoutAlertWidth = 186.0;
+  static const workoutAlertHPadding = 16.0;
+  static const workoutAlertVPadding = 14.0;
+  static const workoutAlertIconGap = 8.0;
+  static const workoutAlertTop = 280.0;
+  static const workoutAlertRight = 13.0;
   static const workoutMetricIconSize = 40.0;
   static const workoutMetricIconRadius = 9.0;
-  static const workoutPauseSize = 47.0;
+  static const workoutMetricGap = 5.0;
+  static const workoutMetricsTopPadding = 37.0;
+  static const workoutMetricsHPadding = 25.0;
+  static const workoutTimerTopGap = 30.0;
+  static const workoutControlsTopGap = 24.0;
+  static const workoutPausePadding = 15.0;
   static const workoutPauseRadius = 10.0;
   static const workoutProgressHeight = 7.0;
   static const workoutSheetHeight = 248.0;
+  static const workoutGradientHeight = 135.0;
+  static const workoutBackBorderWidth = 1.436;
 }
