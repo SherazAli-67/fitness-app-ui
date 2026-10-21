@@ -7,6 +7,8 @@ import 'package:fitness_app/core/asset_res.dart';
 import 'package:fitness_app/core/models/banner_model.dart';
 import 'package:fitness_app/core/models/metric_card_model.dart';
 import 'package:fitness_app/presentation/screens/home_provider.dart';
+import 'package:fitness_app/presentation/widgets/avatar_stack.dart';
+import 'package:fitness_app/presentation/widgets/circle_icon_button.dart';
 import 'package:fitness_app/routing/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -39,7 +41,7 @@ class _HomeScreenBody extends StatelessWidget {
               Padding(padding: .only(top: 8), child: _buildHeader(),),
               Expanded(
                 child: ListView(
-                  // padding: .only(bottom: NumberConstant.homeBottomContentPadding),
+                  padding: .only(bottom: NumberConstant.homeBottomContentPadding),
                   children: [
                     Column(
                       spacing: NumberConstant.homeDotsToCategories,
@@ -94,13 +96,7 @@ class _HomeScreenBody extends StatelessWidget {
             ],
           ),
         ),
-        DecoratedBox(
-          decoration: BoxDecoration(color: AppColors.whiteColor, shape: .circle,),
-          child: Padding(
-            padding: .all(NumberConstant.circleIconPadding),
-            child: SvgPicture.asset(AssetRes.icSearch,),
-          ),
-        ),
+        CircleIconButton(icon: AssetRes.icSearch,),
       ],
     );
   }
@@ -144,7 +140,12 @@ class _HomeScreenBody extends StatelessWidget {
               spacing: 12,
               children: [
                 Text('${banner.titleLine1}\n${banner.titleLine2}', style: AppTextStyles.bannerTitle,),
-                _buildAvatarStack(banner),
+                AvatarStack(
+                  images: banner.avatarImages,
+                  size: NumberConstant.avatarStackSize,
+                  overlap: NumberConstant.stackedAvatarOverlap,
+                  extraCount: banner.extraCount,
+                ),
                 GestureDetector(
                   onTap: () => context.push(NamedRoutes.activeWorkout.routeName),
                   child: DecoratedBox(
@@ -168,44 +169,6 @@ class _HomeScreenBody extends StatelessWidget {
             top: 10,
             right: 25,
             child: SvgPicture.asset(AssetRes.icBannerClose,),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildAvatarStack(BannerModel banner) {
-    return SizedBox(
-      height: NumberConstant.avatarStackSize,
-      width: 145,
-      child: Stack(
-        children: [
-          for (var i = 0; i < banner.avatarImages.length; i++)
-            Positioned(
-              left: i * NumberConstant.stackedAvatarOverlap,
-              child: Container(
-                width: NumberConstant.avatarStackSize,
-                height: NumberConstant.avatarStackSize,
-                decoration: BoxDecoration(
-                  shape: .circle,
-                  border: .all(color: AppColors.whiteColor, width: 1.5),
-                  image: DecorationImage(image: AssetImage(banner.avatarImages[i]), fit: .cover,),
-                ),
-              ),
-            ),
-          Positioned(
-            left: banner.avatarImages.length * NumberConstant.stackedAvatarOverlap,
-            child: Container(
-              width: NumberConstant.avatarCountSize,
-              height: NumberConstant.avatarCountSize,
-              alignment: .center,
-              decoration: BoxDecoration(
-                color: AppColors.whiteColor,
-                shape: .circle,
-                border: .all(color: AppColors.avatarBorderColor, width: 1.1),
-              ),
-              child: Text(banner.extraCount, style: AppTextStyles.avatarCount,),
-            ),
           ),
         ],
       ),

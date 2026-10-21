@@ -9,6 +9,8 @@ import 'package:fitness_app/core/asset_res.dart';
 import 'package:fitness_app/core/models/calendar_day_model.dart';
 import 'package:fitness_app/core/models/daily_activity_model.dart';
 import 'package:fitness_app/presentation/screens/activity_provider.dart';
+import 'package:fitness_app/presentation/widgets/avatar_stack.dart';
+import 'package:fitness_app/presentation/widgets/circle_icon_button.dart';
 import 'package:fitness_app/routing/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -64,24 +66,9 @@ class _ActivityScreenBody extends StatelessWidget {
   Widget _buildHeader(BuildContext context) {
     return Row(
       children: [
-        GestureDetector(
-          onTap: () => context.go(NamedRoutes.home.routeName),
-          child: DecoratedBox(
-            decoration: BoxDecoration(color: AppColors.whiteColor, shape: .circle,),
-            child: Padding(
-              padding: .all(NumberConstant.circleIconPadding),
-              child: SvgPicture.asset(AssetRes.icBack,),
-            ),
-          ),
-        ),
+        CircleIconButton(icon: AssetRes.icBack, onTap: () => context.go(NamedRoutes.home.routeName),),
         Expanded(child: Text(StringConst.myActivity, style: AppTextStyles.headingH2, textAlign: .center,),),
-        DecoratedBox(
-          decoration: BoxDecoration(color: AppColors.whiteColor, shape: .circle,),
-          child: Padding(
-            padding: .all(NumberConstant.circleIconPadding),
-            child: SvgPicture.asset(AssetRes.icSearch,),
-          ),
-        ),
+        CircleIconButton(icon: AssetRes.icSearch,),
       ],
     );
   }
@@ -233,36 +220,11 @@ class _ActivityScreenBody extends StatelessWidget {
                       ],
                     ),
                   ),
-                  _buildAvatarStack(activity.avatarImages),
+                  AvatarStack(images: activity.avatarImages,),
                 ],
               ),
             ),
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildAvatarStack(List<String> images) {
-    final width = NumberConstant.activityAvatarSize + (images.length - 1) * NumberConstant.activityAvatarOverlap;
-    return SizedBox(
-      width: width,
-      height: NumberConstant.activityAvatarSize,
-      child: Stack(
-        children: [
-          for (var i = 0; i < images.length; i++)
-            Positioned(
-              left: i * NumberConstant.activityAvatarOverlap,
-              child: Container(
-                width: NumberConstant.activityAvatarSize,
-                height: NumberConstant.activityAvatarSize,
-                decoration: BoxDecoration(
-                  shape: .circle,
-                  border: .all(color: AppColors.whiteColor, width: 1.5),
-                  image: DecorationImage(image: AssetImage(images[i]), fit: .cover,),
-                ),
-              ),
-            ),
         ],
       ),
     );

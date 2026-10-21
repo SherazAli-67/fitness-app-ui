@@ -8,6 +8,7 @@ import 'package:fitness_app/core/app_textstyles.dart';
 import 'package:fitness_app/core/asset_res.dart';
 import 'package:fitness_app/core/models/workout_metric_model.dart';
 import 'package:fitness_app/presentation/screens/active_workout_provider.dart';
+import 'package:fitness_app/presentation/widgets/circle_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
@@ -55,18 +56,12 @@ class _ActiveWorkoutBody extends StatelessWidget {
               alignment: .topLeft,
               child: Padding(
                 padding: .only(left: NumberConstant.horizontalPadding, top: 8,),
-                child: GestureDetector(
+                child: CircleIconButton(
+                  icon: AssetRes.icBackWhite,
                   onTap: () => context.pop(),
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      shape: .circle,
-                      border: .all(color: AppColors.lightBorderColor, width: NumberConstant.workoutBackBorderWidth),
-                    ),
-                    child: Padding(
-                      padding: .all(NumberConstant.circleIconPadding),
-                      child: SvgPicture.asset(AssetRes.icBackWhite,),
-                    ),
-                  ),
+                  backgroundColor: const Color(0x00000000),
+                  borderColor: AppColors.lightBorderColor,
+                  borderWidth: NumberConstant.workoutBackBorderWidth,
                 ),
               ),
             ),
