@@ -39,7 +39,7 @@ class _HomeScreenBody extends StatelessWidget {
               Padding(padding: .only(top: 8), child: _buildHeader(),),
               Expanded(
                 child: ListView(
-                  padding: .only(bottom: NumberConstant.homeBottomContentPadding),
+                  // padding: .only(bottom: NumberConstant.homeBottomContentPadding),
                   children: [
                     Column(
                       spacing: NumberConstant.homeDotsToCategories,
@@ -111,10 +111,12 @@ class _HomeScreenBody extends StatelessWidget {
       clipBehavior: .none,
       alignment: .topCenter,
       children: [
-        Positioned(
-          top: 33,
+
+         Positioned(
+          top: 45,
+          left: 20,
+          right: 20,
           child: Container(
-            width: NumberConstant.bannerAccentWidth,
             height: NumberConstant.bannerAccentHeight,
             decoration: BoxDecoration(color: AppColors.bannerAccentColor, borderRadius: .circular(NumberConstant.bannerRadius),),
           ),
@@ -129,21 +131,14 @@ class _HomeScreenBody extends StatelessWidget {
       height: NumberConstant.bannerHeight,
       decoration: BoxDecoration(color: AppColors.bannerBlueColor, borderRadius: .circular(NumberConstant.bannerRadius),),
       clipBehavior: .hardEdge,
+
       child: Stack(
         children: [
           Positioned.fill(child: SvgPicture.asset(AssetRes.bannerPattern, fit: .cover,),),
           Positioned(
-            right: 0,
-            bottom: 0,
-            child: Image.asset(banner.image, width: NumberConstant.bannerImageWidth, height: 179, fit: .cover,),
-          ),
-          Positioned(
             top: 18,
-            right: 14,
-            child: SvgPicture.asset(AssetRes.icBannerClose,),
-          ),
-          Padding(
-            padding: .only(left: NumberConstant.bannerContentLeft, top: 18, right: NumberConstant.bannerImageWidth * 0.45, bottom: 20,),
+            right: 18,
+            left: 18,
             child: Column(
               crossAxisAlignment: .start,
               spacing: 12,
@@ -162,6 +157,17 @@ class _HomeScreenBody extends StatelessWidget {
                 ),
               ],
             ),
+          ),
+          Positioned(
+            top: 10,
+            right: 25,
+            bottom: 0,
+            child: Image.asset(banner.image, fit: .cover,),
+          ),
+          Positioned(
+            top: 10,
+            right: 25,
+            child: SvgPicture.asset(AssetRes.icBannerClose,),
           ),
         ],
       ),

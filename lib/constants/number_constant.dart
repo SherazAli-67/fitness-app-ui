@@ -8,7 +8,7 @@ class NumberConstant {
 
   static const bannerHeight = 195.0;
   static const bannerRadius = 27.0;
-  static const bannerAccentHeight = 173.0;
+  static const bannerAccentHeight = 165.0;
   static const bannerAccentWidth = 353.0;
   static const bannerCtaRadius = 20.0;
   static const avatarStackSize = 31.257;
