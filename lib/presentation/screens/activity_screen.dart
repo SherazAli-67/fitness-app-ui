@@ -11,6 +11,7 @@ import 'package:fitness_app/core/models/daily_activity_model.dart';
 import 'package:fitness_app/presentation/screens/activity_provider.dart';
 import 'package:fitness_app/presentation/widgets/avatar_stack.dart';
 import 'package:fitness_app/presentation/widgets/circle_icon_button.dart';
+import 'package:fitness_app/presentation/widgets/staggered_entrance.dart';
 import 'package:fitness_app/routing/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -40,7 +41,7 @@ class _ActivityScreenBody extends StatelessWidget {
           child: Column(
             spacing: NumberConstant.activitySectionGap,
             children: [
-              Padding(padding: .only(top: 8), child: _buildHeader(context),),
+              Padding(padding: .only(top: 8), child: StaggeredEntrance(index: 0, child: _buildHeader(context),),),
               Expanded(
                 child: ListView(
                   padding: .only(bottom: NumberConstant.activityBottomContentPadding),
@@ -48,8 +49,8 @@ class _ActivityScreenBody extends StatelessWidget {
                     Column(
                       spacing: NumberConstant.activitySectionGap,
                       children: [
-                        _buildCalendarCard(context),
-                        _buildDailyActivitiesHeader(),
+                        StaggeredEntrance(index: 1, child: _buildCalendarCard(context),),
+                        StaggeredEntrance(index: 2, child: _buildDailyActivitiesHeader(),),
                         _buildDailyActivitiesList(),
                       ],
                     ),
@@ -137,20 +138,24 @@ class _ActivityScreenBody extends StatelessWidget {
 
   Widget _buildDayCell(BuildContext context, CalendarDayModel day, bool isSelected, int index) {
     final content = Center(child: Text('${day.day}', style: AppTextStyles.calendarDay,),);
-    if (!day.inMonth) {
-      return GestureDetector(
-        onTap: () => context.read<ActivityProvider>().selectDay(index),
-        child: CustomPaint(painter: _DashedCirclePainter(), child: content,),
-      );
-    }
+    final cell = !day.inMonth
+        ? CustomPaint(painter: _DashedCirclePainter(), child: content,)
+        : AnimatedContainer(
+            duration: const Duration(milliseconds: NumberConstant.animFastMs),
+            curve: Curves.easeOut,
+            decoration: BoxDecoration(
+              color: isSelected ? AppColors.calendarSelectedColor : AppColors.calendarDayBgColor,
+              shape: .circle,
+            ),
+            child: content,
+          );
     return GestureDetector(
       onTap: () => context.read<ActivityProvider>().selectDay(index),
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: isSelected ? AppColors.calendarSelectedColor : AppColors.calendarDayBgColor,
-          shape: .circle,
-        ),
-        child: content,
+      child: AnimatedScale(
+        scale: isSelected ? 1.08 : 1,
+        duration: const Duration(milliseconds: NumberConstant.animFastMs),
+        curve: Curves.easeOut,
+        child: cell,
       ),
     );
   }
@@ -167,7 +172,7 @@ class _ActivityScreenBody extends StatelessWidget {
   Widget _buildDailyActivitiesList() {
     return Column(
       spacing: NumberConstant.activityListGap,
-      children: AppData.dailyActivities.map(_buildActivityRow).toList(),
+      children: List.generate(AppData.dailyActivities.length, (index) => StaggeredEntrance(index: 3 + index, child: _buildActivityRow(AppData.dailyActivities[index]),),),
     );
   }
 
