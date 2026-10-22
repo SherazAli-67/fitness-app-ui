@@ -9,6 +9,7 @@ import 'package:fitness_app/core/models/metric_card_model.dart';
 import 'package:fitness_app/presentation/screens/home_provider.dart';
 import 'package:fitness_app/presentation/widgets/avatar_stack.dart';
 import 'package:fitness_app/presentation/widgets/circle_icon_button.dart';
+import 'package:fitness_app/presentation/widgets/staggered_entrance.dart';
 import 'package:fitness_app/routing/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -38,7 +39,7 @@ class _HomeScreenBody extends StatelessWidget {
           child: Column(
             spacing: NumberConstant.homeSectionSpacing,
             children: [
-              Padding(padding: .only(top: 8), child: _buildHeader(),),
+              Padding(padding: .only(top: 8), child: StaggeredEntrance(index: 0, child: _buildHeader(),),),
               Expanded(
                 child: ListView(
                   padding: .only(bottom: NumberConstant.homeBottomContentPadding),
@@ -46,14 +47,17 @@ class _HomeScreenBody extends StatelessWidget {
                     Column(
                       spacing: NumberConstant.homeDotsToCategories,
                       children: [
-                        Column(
-                          spacing: NumberConstant.homeBannerToDots,
-                          children: [
-                            _buildBannerSection(context),
-                            _buildPageDots(context),
-                          ],
+                        StaggeredEntrance(
+                          index: 1,
+                          child: Column(
+                            spacing: NumberConstant.homeBannerToDots,
+                            children: [
+                              _buildBannerSection(context),
+                              _buildPageDots(context),
+                            ],
+                          ),
                         ),
-                        _buildCategoryChips(context),
+                        StaggeredEntrance(index: 2, child: _buildCategoryChips(context),),
                         _buildMetricsGrid(context),
                       ],
                     ),
@@ -75,19 +79,18 @@ class _HomeScreenBody extends StatelessWidget {
             spacing: 11,
             children: [
               ClipOval(
-                //profileAvatar, headerAvatarSize
-                child: const SizedBox()
+                child: Image.asset(AssetRes.profileAvatar, height: NumberConstant.headerAvatarSize,),
               ),
               Expanded(
                 child: Column(
                   crossAxisAlignment: .start,
                   children: [
-                    //greetingHello, greetingLabel
+                    Text(StringConst.greetingHello, style: AppTextStyles.greetingLabel,),
                     Text.rich(
                       TextSpan(
                         children: [
-                          //greetingName, greetingName,
-                          //greetingExclaim, greetingName.w400
+                          TextSpan(text: StringConst.greetingName, style: AppTextStyles.greetingName,),
+                          TextSpan(text: StringConst.greetingExclaim, style: AppTextStyles.greetingName.copyWith(fontWeight: .w400))
                         ],
                       ),
                     ),
@@ -97,8 +100,7 @@ class _HomeScreenBody extends StatelessWidget {
             ],
           ),
         ),
-
-        // CircleIconButton(icon: AssetRes.icSearch,),
+        CircleIconButton(icon: AssetRes.icSearch,),
       ],
     );
   }
@@ -109,14 +111,13 @@ class _HomeScreenBody extends StatelessWidget {
       clipBehavior: .none,
       alignment: .topCenter,
       children: [
-
-         Positioned(
+        Positioned(
           top: 45,
           left: 20,
           right: 20,
           child: Container(
             height: NumberConstant.bannerAccentHeight,
-            // decoration: BoxDecoration(color: AppColors.bannerAccentColor, borderRadius: .circular(NumberConstant.bannerRadius),),
+            decoration: BoxDecoration(color: AppColors.bannerAccentColor, borderRadius: .circular(NumberConstant.bannerRadius),),
           ),
         ),
         _buildBannerCard(context, banner),
@@ -127,12 +128,11 @@ class _HomeScreenBody extends StatelessWidget {
   Widget _buildBannerCard(BuildContext context, BannerModel banner) {
     return Container(
       height: NumberConstant.bannerHeight,
-      // decoration: BoxDecoration(color: AppColors.bannerBlueColor, borderRadius: .circular(NumberConstant.bannerRadius),),
-      // clipBehavior: .hardEdge,
+      decoration: BoxDecoration(color: AppColors.bannerBlueColor, borderRadius: .circular(NumberConstant.bannerRadius),),
+      clipBehavior: .hardEdge,
       child: Stack(
         children: [
-          //bannerPattern, .cover
-          Positioned.fill(child: const SizedBox()),
+          Positioned.fill(child: SvgPicture.asset(AssetRes.bannerPattern, fit: .cover,)),
           Positioned(
             top: 18,
             right: 18,
@@ -141,22 +141,20 @@ class _HomeScreenBody extends StatelessWidget {
               crossAxisAlignment: .start,
               spacing: 12,
               children: [
-                //${banner.titleLine1}\n${banner.titleLine2}, bannerTitle
-                /*AvatarStack(
+                Text('${banner.titleLine1}\n${banner.titleLine2}', style: AppTextStyles.bannerTitle,),
+                AvatarStack(
                   images: banner.avatarImages,
                   size: NumberConstant.avatarStackSize,
                   overlap: NumberConstant.stackedAvatarOverlap,
                   extraCount: banner.extraCount,
-                ),*/
-                GestureDetector(
+                ),
+                _PressScale(
                   onTap: () => context.push(NamedRoutes.activeWorkout.routeName),
                   child: DecoratedBox(
-                    //whiteColor
-                    decoration: BoxDecoration(color: Colors.transparent, borderRadius: .circular(NumberConstant.bannerCtaRadius),),
+                    decoration: BoxDecoration(color: AppColors.whiteColor, borderRadius: .circular(NumberConstant.bannerCtaRadius),),
                     child: Padding(
                       padding: .only(left: 15, right: 15, top: 10, bottom: 12,),
-                      //ctaLabel, bannerCta
-                      child: const SizedBox()
+                      child: Text(banner.ctaLabel, style: AppTextStyles.bannerCta,),
                     ),
                   ),
                 ),
@@ -167,14 +165,12 @@ class _HomeScreenBody extends StatelessWidget {
             top: 10,
             right: 25,
             bottom: 0,
-            //banner.image, fit.cover
-            child: const SizedBox()
+            child: Image.asset(banner.image, fit: .cover,),
           ),
           Positioned(
             top: 10,
             right: 25,
-            //icBannerClose
-            child: const SizedBox()
+            child: SvgPicture.asset(AssetRes.icBannerClose),
           ),
         ],
       ),
@@ -186,40 +182,44 @@ class _HomeScreenBody extends StatelessWidget {
     return Row(
       mainAxisAlignment: .center,
       spacing: NumberConstant.pageDotGap,
-      children: List.generate(3, (index) => Container(
-        width: NumberConstant.pageDotSize,
-        height: NumberConstant.pageDotSize,
-        decoration: BoxDecoration(
-          // color: page == index ? AppColors.blackColor : AppColors.pageDotInactiveColor,
-          shape: .circle,
-        ),
-      ),),
+      children: List.generate(3, (index) {
+        final isActive = page == index;
+        return AnimatedContainer(
+          duration: const Duration(milliseconds: NumberConstant.animFastMs),
+          curve: Curves.easeOut,
+          width: isActive ? NumberConstant.pageDotSize + 4 : NumberConstant.pageDotSize,
+          height: NumberConstant.pageDotSize,
+          decoration: BoxDecoration(
+            color: isActive ? AppColors.blackColor : AppColors.pageDotInactiveColor,
+            borderRadius: .circular(NumberConstant.pageDotSize),
+          ),
+        );
+      },),
     );
   }
 
   Widget _buildCategoryChips(BuildContext context) {
     final selectedIndex = context.watch<HomeProvider>().selectedCategoryIndex;
     return Container(
-      // decoration: BoxDecoration(color: AppColors.whiteColor, borderRadius: .circular(NumberConstant.categoryBarRadius),),
+      decoration: BoxDecoration(color: AppColors.whiteColor, borderRadius: .circular(NumberConstant.categoryBarRadius),),
       padding: .all(NumberConstant.categoryBarPadding),
       child: SingleChildScrollView(
         scrollDirection: .horizontal,
         child: Row(
           children: List.generate(AppData.categories.length, (index) {
             final isSelected = selectedIndex == index;
-            String category = AppData.categories[index].label;
+            final category = AppData.categories[index].label;
             return GestureDetector(
               onTap: () => context.read<HomeProvider>().selectCategory(index),
-              child: DecoratedBox(
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: NumberConstant.animFastMs),
+                curve: Curves.easeOut,
                 decoration: BoxDecoration(
-                  // color: isSelected ? AppColors.chipSelectedColor : null,
+                  color: isSelected ? AppColors.chipSelectedColor : Colors.transparent,
                   borderRadius: .circular(NumberConstant.categoryChipRadius),
                 ),
-                child: Padding(
-                  padding: .symmetric(horizontal: isSelected ? 20 : 13, vertical: 12,),
-                  //category, headingH3
-                  child: const SizedBox()
-                ),
+                padding: .symmetric(horizontal: isSelected ? 20 : 13, vertical: 12,),
+                child: Text(category, style: AppTextStyles.headingH3,),
               ),
             );
           }),
@@ -235,16 +235,16 @@ class _HomeScreenBody extends StatelessWidget {
         Row(
           spacing: NumberConstant.metricGridGap,
           children: [
-            Expanded(child: _buildMetricCard(AppData.metricCards[0]),),
-            Expanded(child: _buildMetricCard(AppData.metricCards[1]),),
+            Expanded(child: StaggeredEntrance(index: 3, child: _buildMetricCard(AppData.metricCards[0]),),),
+            Expanded(child: StaggeredEntrance(index: 4, child: _buildMetricCard(AppData.metricCards[1]),),),
           ],
         ),
         Row(
           spacing: NumberConstant.metricGridGap,
           crossAxisAlignment: .start,
           children: [
-            Expanded(child: _buildMetricCard(AppData.metricCards[2]),),
-            Expanded(child: _buildAddActivityCard(context),),
+            Expanded(child: StaggeredEntrance(index: 5, child: _buildMetricCard(AppData.metricCards[2]),),),
+            Expanded(child: StaggeredEntrance(index: 6, child: _buildAddActivityCard(context),),),
           ],
         ),
       ],
@@ -255,7 +255,7 @@ class _HomeScreenBody extends StatelessWidget {
     return Container(
       height: NumberConstant.metricCardHeight,
       padding: .all(NumberConstant.metricCardPadding),
-      // decoration: BoxDecoration(color: AppColors.whiteColor, borderRadius: .circular(NumberConstant.metricCardRadius),),
+      decoration: BoxDecoration(color: AppColors.whiteColor, borderRadius: .circular(NumberConstant.metricCardRadius),),
       child: Column(
         spacing: 11,
         crossAxisAlignment: .start,
@@ -268,34 +268,32 @@ class _HomeScreenBody extends StatelessWidget {
                 Stack(
                   alignment: .center,
                   children: [
-                    //svg: _metricIconBg(metric.chartKind), widthHeight: metricIconSize
-                    //metric.iconSymbol, fontSize: metric.chartKind == .line ? 16 : 14
+                    SvgPicture.asset(_metricIconBg(metric.chartKind), width: NumberConstant.metricIconSize, height: NumberConstant.metricIconSize,),
+                    Text(metric.iconSymbol, style: TextStyle(fontSize: metric.chartKind == .line ? 16 : 14),)
                   ],
                 ),
-                //metric.title, metricTitle
+                Text(metric.title, style: AppTextStyles.metricTitle,)
               ],
             ),
           ),
           Expanded(
             child: Container(
               width: double.infinity,
-              // decoration: BoxDecoration(color: metric.accentColor, borderRadius: .circular(NumberConstant.metricInnerRadius),),
-              // clipBehavior: .hardEdge,
+              decoration: BoxDecoration(color: metric.accentColor, borderRadius: .circular(NumberConstant.metricInnerRadius),),
+              clipBehavior: .hardEdge,
               child: Stack(
                 children: [
-                  //_buildMetricChart(metric)
-                  Positioned.fill(child: const SizedBox(),),
+                  Positioned.fill(child: _buildMetricChart(metric),),
                   Positioned(
                     left: 13,
                     bottom: 19,
                     child: Row(
                       crossAxisAlignment: .end,
                       children: [
-                        //metric.value, metricValue
+                        Text(metric.value, style: AppTextStyles.metricValue,),
                         Padding(
                           padding: .only(bottom: 2,),
-                          //metric.unit, metricUnit
-                          child: const SizedBox()
+                          child: Text(metric.unit, style: AppTextStyles.metricUnit,),
                         ),
                       ],
                     ),
@@ -327,7 +325,7 @@ class _HomeScreenBody extends StatelessWidget {
       fit: .expand,
       children: [
         Positioned.fill(child: SvgPicture.asset(AssetRes.caloriesChartBg, fit: .fill,),),
-        Positioned(left: 19, right: 19, top: 20, height: 62, child: CustomPaint(painter: _CaloriesBarPainter(),),),
+        Positioned(left: 19, right: 19, top: 20, height: 62, child: _AnimatedCaloriesBars(),),
       ],
     ),
     .wave => Stack(
@@ -340,12 +338,12 @@ class _HomeScreenBody extends StatelessWidget {
   };
 
   Widget _buildAddActivityCard(BuildContext context) {
-    return GestureDetector(
+    return _PressScale(
       onTap: () => context.push(NamedRoutes.activeWorkout.routeName),
       child: Container(
         height: NumberConstant.addActivityCardHeight,
         decoration: BoxDecoration(
-          // color: AppColors.whiteColor,
+          color: AppColors.whiteColor,
           borderRadius: .circular(NumberConstant.addActivityCardRadius),
           border: .all(color: AppColors.borderColor, width: 0.5),
         ),
@@ -353,8 +351,8 @@ class _HomeScreenBody extends StatelessWidget {
           mainAxisAlignment: .center,
           spacing: 5,
           children: [
-            //icAddCircle, widthHeight: 35
-            //addActivity, bodyB2
+            SvgPicture.asset(AssetRes.icAddCircle, height: 35,),
+            Text(StringConst.addActivity, style: AppTextStyles.bodyB2,),
           ],
         ),
       ),
@@ -362,8 +360,55 @@ class _HomeScreenBody extends StatelessWidget {
   }
 }
 
+class _PressScale extends StatefulWidget {
+  final Widget child;
+  final VoidCallback onTap;
+
+  const _PressScale({required this.child, required this.onTap,});
+
+  @override
+  State<_PressScale> createState() => _PressScaleState();
+}
+
+class _PressScaleState extends State<_PressScale> {
+  bool _pressed = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTapDown: (_) => setState(() => _pressed = true),
+      onTapUp: (_) => setState(() => _pressed = false),
+      onTapCancel: () => setState(() => _pressed = false),
+      onTap: widget.onTap,
+      child: AnimatedScale(
+        scale: _pressed ? NumberConstant.animPressScale : 1,
+        duration: const Duration(milliseconds: NumberConstant.animFastMs),
+        curve: Curves.easeOut,
+        child: widget.child,
+      ),
+    );
+  }
+}
+
+class _AnimatedCaloriesBars extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final disableAnimations = MediaQuery.disableAnimationsOf(context);
+    return TweenAnimationBuilder<double>(
+      tween: Tween(begin: disableAnimations ? 1 : 0, end: 1),
+      duration: Duration(milliseconds: disableAnimations ? 0 : NumberConstant.animEntranceMs),
+      curve: Curves.easeOutCubic,
+      builder: (context, progress, _) => CustomPaint(painter: _CaloriesBarPainter(progress: progress),),
+    );
+  }
+}
+
 class _CaloriesBarPainter extends CustomPainter {
+  final double progress;
+
   static const _heights = [48.0, 31.0, 26.0, 29.0, 44.0, 43.0, 34.0, 34.0, 28.0, 51.0];
+
+  _CaloriesBarPainter({required this.progress});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -373,9 +418,10 @@ class _CaloriesBarPainter extends CustomPainter {
     final totalWidth = (_heights.length * barWidth) + ((_heights.length - 1) * gap);
     var x = (size.width - totalWidth) / 2;
     for (final height in _heights) {
-      final top = size.height - height;
+      final animatedHeight = height * progress;
+      final top = size.height - animatedHeight;
       canvas.drawRRect(
-        RRect.fromRectAndRadius(Rect.fromLTWH(x, top, barWidth, height), const Radius.circular(25),),
+        RRect.fromRectAndRadius(Rect.fromLTWH(x, top, barWidth, animatedHeight), const Radius.circular(25),),
         paint,
       );
       x += barWidth + gap;
@@ -383,5 +429,5 @@ class _CaloriesBarPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+  bool shouldRepaint(covariant _CaloriesBarPainter oldDelegate) => oldDelegate.progress != progress;
 }

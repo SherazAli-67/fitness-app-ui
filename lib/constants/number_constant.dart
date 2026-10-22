@@ -93,4 +93,11 @@ class NumberConstant {
   static const workoutSheetHeight = 248.0;
   static const workoutGradientHeight = 135.0;
   static const workoutBackBorderWidth = 1.436;
+
+  static const animFastMs = 200;
+  static const animNormalMs = 400;
+  static const animEntranceMs = 900;
+  static const animStaggerMs = 60;
+  static const animSlideOffset = 0.06;
+  static const animPressScale = 0.96;
 }
