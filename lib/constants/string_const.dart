@@ -8,7 +8,7 @@ class StringConst {
   static const icTimeClockSymbol = '🕒';
 
   static const greetingHello = 'Hello 👋,';
-  static const greetingName = 'Design Monks';
+  static const greetingName = 'Sheraz Ali';
   static const greetingExclaim = '!';
 
   static const bannerTitleLine1 = 'Refresh your body ';

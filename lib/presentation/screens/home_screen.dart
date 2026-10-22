@@ -75,18 +75,19 @@ class _HomeScreenBody extends StatelessWidget {
             spacing: 11,
             children: [
               ClipOval(
-                child: Image.asset(AssetRes.profileAvatar, width: NumberConstant.headerAvatarSize, height: NumberConstant.headerAvatarSize, fit: .cover,),
+                //profileAvatar, headerAvatarSize
+                child: const SizedBox()
               ),
               Expanded(
                 child: Column(
                   crossAxisAlignment: .start,
                   children: [
-                    Text(StringConst.greetingHello, style: AppTextStyles.greetingLabel,),
+                    //greetingHello, greetingLabel
                     Text.rich(
                       TextSpan(
                         children: [
-                          TextSpan(text: StringConst.greetingName, style: AppTextStyles.greetingName,),
-                          TextSpan(text: StringConst.greetingExclaim, style: AppTextStyles.greetingName.copyWith(fontWeight: .w400),),
+                          //greetingName, greetingName,
+                          //greetingExclaim, greetingName.w400
                         ],
                       ),
                     ),
@@ -96,7 +97,8 @@ class _HomeScreenBody extends StatelessWidget {
             ],
           ),
         ),
-        CircleIconButton(icon: AssetRes.icSearch,),
+
+        // CircleIconButton(icon: AssetRes.icSearch,),
       ],
     );
   }
@@ -114,7 +116,7 @@ class _HomeScreenBody extends StatelessWidget {
           right: 20,
           child: Container(
             height: NumberConstant.bannerAccentHeight,
-            decoration: BoxDecoration(color: AppColors.bannerAccentColor, borderRadius: .circular(NumberConstant.bannerRadius),),
+            // decoration: BoxDecoration(color: AppColors.bannerAccentColor, borderRadius: .circular(NumberConstant.bannerRadius),),
           ),
         ),
         _buildBannerCard(context, banner),
@@ -125,12 +127,12 @@ class _HomeScreenBody extends StatelessWidget {
   Widget _buildBannerCard(BuildContext context, BannerModel banner) {
     return Container(
       height: NumberConstant.bannerHeight,
-      decoration: BoxDecoration(color: AppColors.bannerBlueColor, borderRadius: .circular(NumberConstant.bannerRadius),),
-      clipBehavior: .hardEdge,
-
+      // decoration: BoxDecoration(color: AppColors.bannerBlueColor, borderRadius: .circular(NumberConstant.bannerRadius),),
+      // clipBehavior: .hardEdge,
       child: Stack(
         children: [
-          Positioned.fill(child: SvgPicture.asset(AssetRes.bannerPattern, fit: .cover,),),
+          //bannerPattern, .cover
+          Positioned.fill(child: const SizedBox()),
           Positioned(
             top: 18,
             right: 18,
@@ -139,20 +141,22 @@ class _HomeScreenBody extends StatelessWidget {
               crossAxisAlignment: .start,
               spacing: 12,
               children: [
-                Text('${banner.titleLine1}\n${banner.titleLine2}', style: AppTextStyles.bannerTitle,),
-                AvatarStack(
+                //${banner.titleLine1}\n${banner.titleLine2}, bannerTitle
+                /*AvatarStack(
                   images: banner.avatarImages,
                   size: NumberConstant.avatarStackSize,
                   overlap: NumberConstant.stackedAvatarOverlap,
                   extraCount: banner.extraCount,
-                ),
+                ),*/
                 GestureDetector(
                   onTap: () => context.push(NamedRoutes.activeWorkout.routeName),
                   child: DecoratedBox(
-                    decoration: BoxDecoration(color: AppColors.whiteColor, borderRadius: .circular(NumberConstant.bannerCtaRadius),),
+                    //whiteColor
+                    decoration: BoxDecoration(color: Colors.transparent, borderRadius: .circular(NumberConstant.bannerCtaRadius),),
                     child: Padding(
                       padding: .only(left: 15, right: 15, top: 10, bottom: 12,),
-                      child: Text(banner.ctaLabel, style: AppTextStyles.bannerCta,),
+                      //ctaLabel, bannerCta
+                      child: const SizedBox()
                     ),
                   ),
                 ),
@@ -163,12 +167,14 @@ class _HomeScreenBody extends StatelessWidget {
             top: 10,
             right: 25,
             bottom: 0,
-            child: Image.asset(banner.image, fit: .cover,),
+            //banner.image, fit.cover
+            child: const SizedBox()
           ),
           Positioned(
             top: 10,
             right: 25,
-            child: SvgPicture.asset(AssetRes.icBannerClose,),
+            //icBannerClose
+            child: const SizedBox()
           ),
         ],
       ),
@@ -184,7 +190,7 @@ class _HomeScreenBody extends StatelessWidget {
         width: NumberConstant.pageDotSize,
         height: NumberConstant.pageDotSize,
         decoration: BoxDecoration(
-          color: page == index ? AppColors.blackColor : AppColors.pageDotInactiveColor,
+          // color: page == index ? AppColors.blackColor : AppColors.pageDotInactiveColor,
           shape: .circle,
         ),
       ),),
@@ -194,23 +200,25 @@ class _HomeScreenBody extends StatelessWidget {
   Widget _buildCategoryChips(BuildContext context) {
     final selectedIndex = context.watch<HomeProvider>().selectedCategoryIndex;
     return Container(
-      decoration: BoxDecoration(color: AppColors.whiteColor, borderRadius: .circular(NumberConstant.categoryBarRadius),),
+      // decoration: BoxDecoration(color: AppColors.whiteColor, borderRadius: .circular(NumberConstant.categoryBarRadius),),
       padding: .all(NumberConstant.categoryBarPadding),
       child: SingleChildScrollView(
         scrollDirection: .horizontal,
         child: Row(
           children: List.generate(AppData.categories.length, (index) {
             final isSelected = selectedIndex == index;
+            String category = AppData.categories[index].label;
             return GestureDetector(
               onTap: () => context.read<HomeProvider>().selectCategory(index),
               child: DecoratedBox(
                 decoration: BoxDecoration(
-                  color: isSelected ? AppColors.chipSelectedColor : null,
+                  // color: isSelected ? AppColors.chipSelectedColor : null,
                   borderRadius: .circular(NumberConstant.categoryChipRadius),
                 ),
                 child: Padding(
                   padding: .symmetric(horizontal: isSelected ? 20 : 13, vertical: 12,),
-                  child: Text(AppData.categories[index].label, style: AppTextStyles.headingH3,),
+                  //category, headingH3
+                  child: const SizedBox()
                 ),
               ),
             );
@@ -247,7 +255,7 @@ class _HomeScreenBody extends StatelessWidget {
     return Container(
       height: NumberConstant.metricCardHeight,
       padding: .all(NumberConstant.metricCardPadding),
-      decoration: BoxDecoration(color: AppColors.whiteColor, borderRadius: .circular(NumberConstant.metricCardRadius),),
+      // decoration: BoxDecoration(color: AppColors.whiteColor, borderRadius: .circular(NumberConstant.metricCardRadius),),
       child: Column(
         spacing: 11,
         crossAxisAlignment: .start,
@@ -260,32 +268,34 @@ class _HomeScreenBody extends StatelessWidget {
                 Stack(
                   alignment: .center,
                   children: [
-                    SvgPicture.asset(_metricIconBg(metric.chartKind), width: NumberConstant.metricIconSize, height: NumberConstant.metricIconSize,),
-                    Text(metric.iconSymbol, style: TextStyle(fontSize: metric.chartKind == .line ? 16 : 14,),),
+                    //svg: _metricIconBg(metric.chartKind), widthHeight: metricIconSize
+                    //metric.iconSymbol, fontSize: metric.chartKind == .line ? 16 : 14
                   ],
                 ),
-                Text(metric.title, style: AppTextStyles.metricTitle,),
+                //metric.title, metricTitle
               ],
             ),
           ),
           Expanded(
             child: Container(
               width: double.infinity,
-              decoration: BoxDecoration(color: metric.accentColor, borderRadius: .circular(NumberConstant.metricInnerRadius),),
-              clipBehavior: .hardEdge,
+              // decoration: BoxDecoration(color: metric.accentColor, borderRadius: .circular(NumberConstant.metricInnerRadius),),
+              // clipBehavior: .hardEdge,
               child: Stack(
                 children: [
-                  Positioned.fill(child: _buildMetricChart(metric),),
+                  //_buildMetricChart(metric)
+                  Positioned.fill(child: const SizedBox(),),
                   Positioned(
                     left: 13,
                     bottom: 19,
                     child: Row(
                       crossAxisAlignment: .end,
                       children: [
-                        Text(metric.value, style: AppTextStyles.metricValue,),
+                        //metric.value, metricValue
                         Padding(
                           padding: .only(bottom: 2,),
-                          child: Text(metric.unit, style: AppTextStyles.metricUnit,),
+                          //metric.unit, metricUnit
+                          child: const SizedBox()
                         ),
                       ],
                     ),
@@ -335,7 +345,7 @@ class _HomeScreenBody extends StatelessWidget {
       child: Container(
         height: NumberConstant.addActivityCardHeight,
         decoration: BoxDecoration(
-          color: AppColors.whiteColor,
+          // color: AppColors.whiteColor,
           borderRadius: .circular(NumberConstant.addActivityCardRadius),
           border: .all(color: AppColors.borderColor, width: 0.5),
         ),
@@ -343,8 +353,8 @@ class _HomeScreenBody extends StatelessWidget {
           mainAxisAlignment: .center,
           spacing: 5,
           children: [
-            SvgPicture.asset(AssetRes.icAddCircle, width: 35, height: 35,),
-            Text(StringConst.addActivity, style: AppTextStyles.bodyB2, textAlign: .center,),
+            //icAddCircle, widthHeight: 35
+            //addActivity, bodyB2
           ],
         ),
       ),
